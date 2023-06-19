@@ -39,4 +39,11 @@ public class DepartmentServiceImpl implements DepartmentService {
                 .filter(employee -> departmentId == null || employee.getDepartment().equals(departmentId))
                 .collect(Collectors.groupingBy(Employee::getDepartment));
     }
+
+    @Override
+    public int getSumSalaryByDepartment(Integer departmentId) {
+        return employeeService.getAllEmployees().values().stream()
+                .filter(employee -> departmentId == null || employee.getDepartment().equals(departmentId)).mapToInt(Employee::getSalary).sum();
+    }
+
 }

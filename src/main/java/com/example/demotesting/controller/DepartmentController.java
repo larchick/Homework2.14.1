@@ -3,10 +3,7 @@ package com.example.demotesting.controller;
 
 import com.example.demotesting.model.Employee;
 import com.example.demotesting.service.DepartmentService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -20,21 +17,20 @@ public class DepartmentController {
         this.departmentService = departmentService;
     }
 
-    @GetMapping("max-salary")
-    public Employee getEmployeeWithMaxSalary(@RequestParam("departmentId") Integer departmentId) {
-        return departmentService.getEmployeeWithMaxSalary(departmentId);
+    @GetMapping("/{id}/salary/max")
+    public Employee getEmployeeWithMaxSalary(@PathVariable Integer id) {
+        return departmentService.getEmployeeWithMaxSalary(id);
     }
 
-    @GetMapping("min-salary")
-    public Employee getEmployeeWithMinSalary(@RequestParam("departmentId") Integer departmentId) {
-        return departmentService.getEmployeeWithMinSalary(departmentId);
+    @GetMapping("/{id}/salary/min")
+    public Employee getEmployeeWithMinSalary(@PathVariable Integer id) {
+        return departmentService.getEmployeeWithMinSalary(id);
     }
 
-    @GetMapping("/all")
-    public Map<Integer, List<Employee>> getGroupedByDepartmentEmployees(
-            @RequestParam(name = "departmentId", required = false) Integer departmentId
-    ) {
-        return departmentService.getGroupedByDepartmentEmployees(departmentId);
+    @GetMapping("/{id}/employees")
+    public Map<Integer, List<Employee>> getGroupedByDepartmentEmployees(@PathVariable Integer id) {
+        return departmentService.getGroupedByDepartmentEmployees(id);
     }
+
 
 }
